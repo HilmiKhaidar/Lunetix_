@@ -1,16 +1,29 @@
-/* Reset and Base Styles */
-* {
+/* Reset and Base Styles with Performance Optimizations */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.5;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
     color: #1F2937;
     background-color: #F9FAFB;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
 }
+
+/* Font loading optimization is handled by Google Fonts with display=swap parameter */
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
@@ -65,6 +78,12 @@ p {
     left: 0;
     right: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -178,11 +197,28 @@ p {
     color: #F59E0B;
 }
 
+.btn-health {
+    background: #10B981;
+    color: white;
+}
+
+.btn-health:hover {
+    background: #059669;
+}
+
 /* Hero Section */
 .hero {
     padding: 8rem 0 4rem;
     background: #FEF3C7;
     min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Health Ecosystem Section */
+.health-ecosystem {
+    padding: 5rem 0;
+    background: #ECFDF5;
     display: flex;
     align-items: center;
 }
@@ -230,9 +266,10 @@ p {
 
 .ecosystem-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 1.5rem;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 .app-card {
@@ -262,6 +299,27 @@ p {
 
 .app-card.lunomoney {
     border-color: #FBBF24;
+}
+
+/* Health Apps Styling */
+.app-card.health-app {
+    border-color: #10B981;
+}
+
+.app-card.health-app:hover {
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+/* Health ecosystem app cards */
+.health-grid .app-card.lunomove,
+.health-grid .app-card.lunosleep,
+.health-grid .app-card.lunocare,
+.health-grid .app-card.lunohydra {
+    border-color: #10B981;
+}
+
+.health-grid .app-card:hover {
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
 }
 
 .app-icon {
@@ -299,22 +357,88 @@ section {
     background: white;
 }
 
-.products-grid {
+/* Remove old carousel styles - not needed anymore */
+
+/* Products Marquee Section */
+/* Department Section */
+.department-section {
+    margin-top: 4rem;
+}
+
+.department-title {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #1F2937;
+    position: relative;
+}
+
+.department-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #FBBF24, #F59E0B);
+    border-radius: 2px;
+}
+
+/* Health Department specific styling */
+.department-section:last-of-type .department-title::after {
+    background: linear-gradient(90deg, #10B981, #059669);
+}
+
+/* Health app unified colors - all using Lunomove green */
+.lunomove-icon rect,
+.lunosleep-icon rect,
+.lunocare-icon rect,
+.lunohydra-icon rect {
+    fill: #10B981 !important;
+}
+
+/* Ensure all health app icons use consistent green color */
+.department-section:last-of-type .product-icon svg rect {
+    fill: #10B981 !important;
+}
+
+/* Health department product cards hover effects */
+.department-section:last-of-type .product-card::before {
+    background: linear-gradient(90deg, #10B981, #059669);
+}
+
+.department-section:last-of-type .product-card:hover {
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+/* Products Grid Static - 4 kolom */
+.products-grid-static {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
+/* Responsive Grid */
 @media (max-width: 1200px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .products-grid-static {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
-    .products-grid {
+    .products-grid-static {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid-static {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
@@ -329,6 +453,8 @@ section {
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-width: 300px;
+    flex-shrink: 0;
 }
 
 .product-card::before {
@@ -912,6 +1038,16 @@ section {
         justify-content: center;
     }
     
+    .health-ecosystem .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .health-ecosystem .hero-title {
+        font-size: 2.5rem;
+    }
+    
     .about-content {
         grid-template-columns: 1fr;
         gap: 2rem;
@@ -936,8 +1072,9 @@ section {
     }
     
     .ecosystem-grid {
-        grid-template-columns: 1fr;
-        max-width: 250px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        max-width: 350px;
     }
     
     .contact-info {
@@ -972,23 +1109,133 @@ section {
         width: 100%;
         max-width: 250px;
     }
+    
+    .ecosystem-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 1rem;
+        max-width: 300px;
+    }
+    
+    .app-card {
+        padding: 1rem;
+    }
+    
+    .app-card span {
+        font-size: 0.875rem;
+    }
 }
 
-/* Smooth scrolling */
-html {
-    scroll-behavior: smooth;
+/* Utility Classes */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.focus-visible {
+    outline: 2px solid #FBBF24;
+    outline-offset: 2px;
+}
+
+/* Performance optimizations */
+.will-change-transform {
+    will-change: transform;
+}
+
+.will-change-opacity {
+    will-change: opacity;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 
-/* Fast transitions - override slow animations */
+/* Optimized transitions for better performance */
 .btn, .product-card, .app-card {
-    transition: all 0.1s ease !important;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
-/* Remove all slow animations globally */
+/* Smooth animations with proper timing */
 *, *::before, *::after {
-    animation-duration: 0.1s !important;
-    transition-duration: 0.1s !important;
+    animation-duration: 0.3s;
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* GPU acceleration for smooth animations */
+.product-card:hover,
+.app-card:hover,
+.btn:hover {
+    transform: translateZ(0);
+}
+
+/* Smooth fade-in animation for sections */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Loading state for better UX */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Enhanced focus styles for accessibility */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.lang-btn:focus-visible {
+    outline: 2px solid #FBBF24;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Improved mobile touch targets */
+@media (max-width: 768px) {
+    .btn,
+    .nav-link,
+    .lang-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 /* Instant hover cursor */
@@ -1020,36 +1267,15 @@ html {
     }
 }
 
-/* Custom Arrow Cursor - Lunotes Style */
-* {
+/* Custom cursor styles - only applied when cursor.js is loaded */
+.custom-cursor-enabled * {
     cursor: none !important;
 }
 
-.custom-cursor {
-    position: fixed;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    z-index: 9999;
-    border-left: 12px solid #FBBF24;
-    border-right: 6px solid transparent;
-    border-bottom: 12px solid transparent;
-    border-top: 6px solid transparent;
-    transform: rotate(-45deg);
-    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
-    opacity: 1;
-    display: block;
-}
-
-/* Disable custom cursor on mobile */
-@media (max-width: 768px) {
-    * {
+/* Disable custom cursor on mobile and touch devices */
+@media (max-width: 768px), (hover: none) {
+    .custom-cursor-enabled * {
         cursor: auto !important;
-    }
-    
-    .custom-cursor,
-    .cursor-trail {
-        display: none !important;
     }
 }
 

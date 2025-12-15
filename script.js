@@ -1,6 +1,57 @@
-// Fast, no-delay website functionality
+/**
+ * Lunetix Website - Professional JavaScript Implementation
+ * Optimized for performance and user experience
+ */
+
+'use strict';
+
+// Enhanced error handling with reporting
+class ErrorHandler {
+    static init() {
+        window.addEventListener('error', this.handleError.bind(this));
+        window.addEventListener('unhandledrejection', this.handlePromiseRejection.bind(this));
+    }
+    
+    static handleError(event) {
+        const error = {
+            message: event.message,
+            filename: event.filename,
+            lineno: event.lineno,
+            colno: event.colno,
+            stack: event.error?.stack
+        };
+        
+        console.error('JavaScript Error:', error);
+        
+        // Report to analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exception', {
+                'description': error.message,
+                'fatal': false
+            });
+        }
+    }
+    
+    static handlePromiseRejection(event) {
+        console.error('Unhandled Promise Rejection:', event.reason);
+        
+        // Report to analytics if available
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'exception', {
+                'description': `Promise rejection: ${event.reason}`,
+                'fatal': false
+            });
+        }
+    }
+}
+
+// Initialize error handling immediately
+ErrorHandler.init();
+
+// Main application functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scrolling for navigation links
+    
+    // Smooth scrolling for navigation links with performance optimization
     const links = document.querySelectorAll('a[href^="#"]');
     
     links.forEach(link => {
@@ -11,69 +62,113 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80;
+                const navbarHeight = 80;
+                const offsetTop = targetSection.offsetTop - navbarHeight;
                 
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
+                // Use requestAnimationFrame for smoother scrolling
+                const startPosition = window.pageYOffset;
+                const distance = offsetTop - startPosition;
+                const duration = 800;
+                let startTime = null;
+                
+                function scrollAnimation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeInOutCubic = progress < 0.5 
+                        ? 4 * progress * progress * progress 
+                        : (progress - 1) * (2 * progress - 2) * (2 * progress - 2) + 1;
+                    
+                    window.scrollTo(0, startPosition + distance * easeInOutCubic);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(scrollAnimation);
+                    }
+                }
+                
+                requestAnimationFrame(scrollAnimation);
             }
         });
     });
     
-    // Navbar scroll effect - instant
+    // Optimized navbar scroll effect with throttling
     const navbar = document.querySelector('.navbar');
+    let isScrolling = false;
     
-    window.addEventListener('scroll', function() {
+    function updateNavbar() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
         if (scrollTop > 100) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = 'none';
+            navbar.classList.remove('scrolled');
         }
-    });
+        
+        isScrolling = false;
+    }
     
-
+    window.addEventListener('scroll', function() {
+        if (!isScrolling) {
+            requestAnimationFrame(updateNavbar);
+            isScrolling = true;
+        }
+    }, { passive: true });
     
-    // Instant hover effects for product cards
+    // Optimized hover effects for product cards with performance
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
+        // Add will-change for better performance
+        card.style.willChange = 'transform, box-shadow';
+        
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
+            this.style.transform = 'translateY(-5px) translateZ(0)';
             this.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.15)';
-        });
+        }, { passive: true });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
+            this.style.transform = 'translateY(0) translateZ(0)';
             this.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-        });
+        }, { passive: true });
     });
     
     // Add click functionality to ecosystem app nodes
     const appNodes = document.querySelectorAll('.app-node');
+    const appCards = document.querySelectorAll('.app-card');
     const appUrls = {
         'Lunotes': 'https://lunotes.vercel.app/',
         'Lunotime': 'https://lunotime.vercel.app/',
         'Calcelix': 'https://calcelix.vercel.app/',
-        'Lunomoney': 'https://lunomoney.vercel.app/'
+        'Lunomoney': 'https://lunomoney.vercel.app/',
+        'Lunomove': 'https://lunomove.vercel.app/',
+        'Lunosleep': 'https://lunosleep.vercel.app/',
+        'Lunocare': 'https://lunocare.vercel.app/',
+        'Lunohydra': 'https://lunohydra.vercel.app/'
     };
     
-    appNodes.forEach(node => {
-        node.addEventListener('click', function(e) {
+    // Handle both app nodes and app cards
+    [...appNodes, ...appCards].forEach(element => {
+        element.addEventListener('click', function(e) {
             e.stopPropagation();
             const appName = this.querySelector('span').textContent;
             const url = appUrls[appName];
             if (url) {
                 window.open(url, '_blank');
+                
+                // Track app clicks
+                if (window.LunetixAnalytics) {
+                    window.LunetixAnalytics.trackEvent('app_card_click', {
+                        app_name: appName,
+                        app_url: url
+                    });
+                }
             }
         });
         
         // Add cursor pointer
-        node.style.cursor = 'pointer';
+        element.style.cursor = 'pointer';
     });
     
     // Track external link clicks
@@ -91,28 +186,26 @@ document.addEventListener('DOMContentLoaded', function() {
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         
-        question.addEventListener('click', function() {
-            const isActive = item.classList.contains('active');
-            
-            // Close all other FAQ items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.classList.remove('active');
+        if (question) {
+            question.addEventListener('click', function() {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other FAQ items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
                 }
             });
-            
-            // Toggle current item
-            if (isActive) {
-                item.classList.remove('active');
-            } else {
-                item.classList.add('active');
-            }
-        });
+        }
     });
-    
-
-    
-
     
     // Mobile App Notification
     const notifyMeBtn = document.getElementById('notifyMeBtn');
@@ -218,11 +311,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         function addChatMessage(message, sender) {
             const chatBody = document.querySelector('.chat-body');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `chat-message ${sender}-message`;
-            messageDiv.innerHTML = `<p>${message}</p>`;
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
+            if (chatBody) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${sender}-message`;
+                messageDiv.innerHTML = `<p>${message}</p>`;
+                chatBody.appendChild(messageDiv);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }
         }
     }
     
@@ -251,7 +346,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             // Save language preference
-            localStorage.setItem('language', selectedLang);
+            if (window.LunetixUtils) {
+                window.LunetixUtils.storage.set('language', selectedLang);
+            } else {
+                localStorage.setItem('language', selectedLang);
+            }
             
             // Update document language
             document.documentElement.setAttribute('lang', selectedLang === 'id' ? 'id' : 'en');
@@ -259,7 +358,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Load saved language preference
-    const savedLang = localStorage.getItem('language') || 'id';
+    const savedLang = (window.LunetixUtils ? 
+        window.LunetixUtils.storage.get('language', 'id') : 
+        localStorage.getItem('language')) || 'id';
     const savedLangBtn = document.querySelector(`[data-lang="${savedLang}"]`);
     
     if (savedLangBtn) {
@@ -317,19 +418,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Add fade-in animation to parent stat item
                         const statItem = counter.closest('.stat-item');
-                        statItem.style.opacity = '0';
-                        statItem.style.transform = 'translateY(20px)';
-                        
-                        setTimeout(() => {
-                            statItem.style.transition = 'all 0.6s ease';
-                            statItem.style.opacity = '1';
-                            statItem.style.transform = 'translateY(0)';
+                        if (statItem) {
+                            statItem.style.opacity = '0';
+                            statItem.style.transform = 'translateY(20px)';
                             
-                            // Start counter animation after fade-in
                             setTimeout(() => {
-                                animateCounter(counter, target);
-                            }, 200);
-                        }, index * 200); // Stagger delay
+                                statItem.style.transition = 'all 0.6s ease';
+                                statItem.style.opacity = '1';
+                                statItem.style.transform = 'translateY(0)';
+                                
+                                // Start counter animation after fade-in
+                                setTimeout(() => {
+                                    animateCounter(counter, target);
+                                }, 200);
+                            }, index * 200); // Stagger delay
+                        }
                     });
                     
                     observer.unobserve(entry.target);
@@ -341,8 +444,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         observer.observe(statsSection);
     }
-    
-
     
     // Back to Top Button with Smooth Animations
     const backToTop = document.getElementById('backToTop');
@@ -399,18 +500,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Performance monitoring
-    window.addEventListener('load', function() {
-        const loadTime = performance.now();
-        console.log(`Lunetix website loaded in ${Math.round(loadTime)}ms`);
+    // Performance monitoring and optimization
+    const performanceObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+            if (entry.entryType === 'largest-contentful-paint') {
+                console.log('LCP:', entry.startTime);
+            }
+        });
     });
+    
+    if ('PerformanceObserver' in window) {
+        try {
+            performanceObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+        } catch (e) {
+            console.warn('Performance Observer not supported');
+        }
+    }
 });
 
-// Error handling
-window.addEventListener('error', function(e) {
-    console.error('JavaScript error:', e.error);
-});
+// Service Worker Registration for PWA functionality
+if ('serviceWorker' in navigator && window.LunetixConfig?.features?.serviceWorker !== false) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registered successfully:', registration.scope);
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New content available, show update notification
+                            console.log('New content available, please refresh.');
+                        }
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log('Service Worker registration failed:', error);
+            });
+    });
+}
 
-window.addEventListener('unhandledrejection', function(e) {
-    console.error('Unhandled promise rejection:', e.reason);
+// Performance monitoring
+window.addEventListener('load', function() {
+    const loadTime = performance.now();
+    console.log(`Lunetix website loaded in ${Math.round(loadTime)}ms`);
 });

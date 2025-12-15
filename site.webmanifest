@@ -1,8 +1,14 @@
 {
-    "name": "Lunetix - Ecosystem Produktivitas Digital",
+    "name": "Lunetix - Ecosystem Produktivitas Digital Terlengkap Indonesia",
     "short_name": "Lunetix",
-    "description": "Ecosystem produktivitas digital terlengkap dengan 4 aplikasi terintegrasi",
+    "description": "Ecosystem produktivitas digital terlengkap dengan aplikasi terintegrasi: Lunotes, Lunotime, Calcelix, dan Lunomoney untuk mengelola hidup digital Anda",
     "icons": [
+        {
+            "src": "favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
         {
             "src": "favicon-16x16.png",
             "sizes": "16x16",
@@ -16,26 +22,84 @@
         {
             "src": "apple-touch-icon.png",
             "sizes": "180x180",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "android-chrome-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "android-chrome-512x512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ],
     "theme_color": "#FBBF24",
     "background_color": "#F9FAFB",
     "display": "standalone",
-    "start_url": "/",
+    "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+    "start_url": "/?utm_source=pwa",
     "scope": "/",
     "orientation": "portrait-primary",
-    "categories": ["productivity", "business", "utilities"],
+    "categories": ["productivity", "business", "utilities", "lifestyle"],
     "lang": "id",
-    "dir": "ltr"
+    "dir": "ltr",
+    "prefer_related_applications": false,
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "shortcuts": [
+        {
+            "name": "Lunotes - Note Taking",
+            "short_name": "Lunotes",
+            "description": "Buka aplikasi note-taking Lunotes",
+            "url": "https://lunotes.vercel.app/",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Lunotime - Time Management",
+            "short_name": "Lunotime",
+            "description": "Buka aplikasi time management Lunotime",
+            "url": "https://lunotime.vercel.app/",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Calcelix - Calculator",
+            "short_name": "Calcelix",
+            "description": "Buka aplikasi calculator Calcelix",
+            "url": "https://calcelix.vercel.app/",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Lunomoney - Financial Management",
+            "short_name": "Lunomoney",
+            "description": "Buka aplikasi financial management Lunomoney",
+            "url": "https://lunomoney.vercel.app/",
+            "icons": [
+                {
+                    "src": "favicon.svg",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ]
 }

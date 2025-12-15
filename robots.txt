@@ -2,21 +2,39 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://lunetix.com/sitemap.xml
+Sitemap: https://lunetix.vercel.app/sitemap.xml
 
-# Crawl-delay
+# Crawl-delay for better server performance
 Crawl-delay: 1
 
-# Disallow specific paths (if any)
-# Disallow: /admin/
-# Disallow: /private/
+# Disallow specific paths for security and performance
+Disallow: /config.js
+Disallow: /*.js$
+Disallow: /*.css$
 
-# Allow specific bots
+# Allow specific search engine bots
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# Block unwanted bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
