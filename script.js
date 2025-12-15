@@ -48,8 +48,75 @@ class ErrorHandler {
 // Initialize error handling immediately
 ErrorHandler.init();
 
+// Resource loading error handler
+function handleResourceError(event) {
+    console.warn('Resource failed to load:', event.target.src || event.target.href);
+    
+    // Handle specific resource failures
+    if (event.target.tagName === 'LINK' && event.target.rel === 'manifest') {
+        console.log('Manifest loading failed - this is normal in development');
+    }
+    
+    if (event.target.tagName === 'IMG') {
+        // Provide fallback for images
+        event.target.style.display = 'none';
+    }
+}
+
+// Add resource error listeners
+document.addEventListener('error', handleResourceError, true);
+
 // Main application functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Add js-enabled class for progressive enhancement
+    document.body.classList.add('js-enabled');
+    
+    // Debug: Check if products section exists
+    const productsSection = document.getElementById('products');
+    const productCards = document.querySelectorAll('.product-card');
+    const departmentSections = document.querySelectorAll('.department-section');
+    const healthDepartment = document.querySelector('.department-section:last-of-type');
+    
+    console.log('Products section found:', !!productsSection);
+    console.log('Product cards found:', productCards.length);
+    console.log('Department sections found:', departmentSections.length);
+    console.log('Health department found:', !!healthDepartment);
+    
+    // Ensure health department is visible
+    if (healthDepartment) {
+        healthDepartment.style.opacity = '1';
+        healthDepartment.style.visibility = 'visible';
+        healthDepartment.style.display = 'block';
+        console.log('Health department visibility ensured');
+    }
+    
+    // Ensure products are visible as fallback
+    if (productCards.length > 0) {
+        console.log('Setting up product visibility fallback');
+        productCards.forEach((card, index) => {
+            // Immediate fallback if animation fails
+            setTimeout(() => {
+                if (window.getComputedStyle(card).opacity === '0') {
+                    console.log('Forcing visibility for product card:', index);
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            }, 1000);
+        });
+    }
+    
+    // Special handling for health department
+    setTimeout(() => {
+        const healthCards = document.querySelectorAll('.department-section:last-of-type .product-card');
+        console.log('Health cards found:', healthCards.length);
+        
+        healthCards.forEach((card, index) => {
+            card.style.opacity = '1';
+            card.style.visibility = 'visible';
+            card.style.transform = 'translateY(0)';
+            console.log(`Health card ${index + 1} visibility ensured`);
+        });
+    }, 500);
     
     // Smooth scrolling for navigation links with performance optimization
     const links = document.querySelectorAll('a[href^="#"]');
@@ -321,51 +388,189 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Language Switcher
-    const langButtons = document.querySelectorAll('.lang-btn');
-    const elementsWithLang = document.querySelectorAll('[data-id][data-en]');
-    
-    langButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const selectedLang = this.getAttribute('data-lang');
+    // Language indicator function
+    function showLanguageIndicator(language) {
+        // Remove existing indicator if any
+        const existingIndicator = document.querySelector('.language-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+        
+        const indicator = document.createElement('div');
+        indicator.className = 'language-indicator';
+        indicator.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            ${language.toUpperCase()}
+        `;
+        document.body.appendChild(indicator);
+        
+        setTimeout(() => {
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(indicator)) {
+                        document.body.removeChild(indicator);
+                    }
+                }, 300);
+            }, 1500);
+        }, 100);
+    }
+
+    // Language Switcher - Enhanced and Fixed
+    function initializeLanguageSwitcher() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        // Use more flexible selector to catch all elements with language attributes
+        const elementsWithLang = document.querySelectorAll('[data-id], [data-en]');
+        const elementsWithBothLang = document.querySelectorAll('[data-id][data-en]');
+        
+        console.log('Language Switcher initialized:', {
+            buttons: langButtons.length,
+            elementsWithLang: elementsWithLang.length,
+            elementsWithBothLang: elementsWithBothLang.length
+        });
+        
+        // Debug: Log first few elements to check attributes
+        elementsWithBothLang.forEach((el, i) => {
+            if (i < 3) {
+                console.log(`Element ${i}:`, {
+                    tag: el.tagName,
+                    id: el.getAttribute('data-id'),
+                    en: el.getAttribute('data-en'),
+                    text: el.textContent.substring(0, 50) + '...'
+                });
+            }
+        });
+        
+        if (langButtons.length === 0) {
+            console.warn('No language buttons found');
+            return;
+        }
+        
+        function switchLanguage(selectedLang) {
+            console.log('Switching to language:', selectedLang);
             
             // Update active button
             langButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+            const activeBtn = document.querySelector(`[data-lang="${selectedLang}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
             
-            // Update content
-            elementsWithLang.forEach(element => {
+            // Update content with better error handling and fallbacks
+            let updatedCount = 0;
+            elementsWithBothLang.forEach((element, index) => {
                 const idText = element.getAttribute('data-id');
                 const enText = element.getAttribute('data-en');
                 
-                if (selectedLang === 'id') {
-                    element.textContent = idText;
+                if (idText || enText) {
+                    try {
+                        if (selectedLang === 'id') {
+                            element.textContent = idText || enText; // Fallback to English if Indonesian not available
+                        } else if (selectedLang === 'en') {
+                            element.textContent = enText || idText; // Fallback to Indonesian if English not available
+                        }
+                        updatedCount++;
+                        
+                        // Add smooth transition animation
+                        element.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                        element.style.transform = 'translateY(-2px)';
+                        element.style.opacity = '0.8';
+                        
+                        setTimeout(() => {
+                            element.style.transform = 'translateY(0)';
+                            element.style.opacity = '1';
+                        }, 50);
+                        
+                    } catch (e) {
+                        console.warn(`Error updating element ${index}:`, e, element);
+                    }
                 } else {
-                    element.textContent = enText;
+                    console.warn(`Element ${index} missing language attributes:`, element);
                 }
             });
             
+            console.log(`Updated ${updatedCount} elements`);
+            
+            // Show language change indicator
+            showLanguageIndicator(selectedLang);
+            
             // Save language preference
-            if (window.LunetixUtils) {
-                window.LunetixUtils.storage.set('language', selectedLang);
-            } else {
-                localStorage.setItem('language', selectedLang);
+            try {
+                localStorage.setItem('lunetix_language', selectedLang);
+                console.log('Language preference saved:', selectedLang);
+            } catch (e) {
+                console.warn('Could not save language preference:', e);
             }
             
             // Update document language
             document.documentElement.setAttribute('lang', selectedLang === 'id' ? 'id' : 'en');
+            
+            // Dispatch custom event for other components
+            window.dispatchEvent(new CustomEvent('languageChanged', { 
+                detail: { language: selectedLang } 
+            }));
+            
+            // Update page title based on language
+            const titleMap = {
+                'id': 'Lunetix - Ecosystem Produktivitas Digital Terlengkap Indonesia',
+                'en': 'Lunetix - Complete Digital Productivity Ecosystem Indonesia'
+            };
+            document.title = titleMap[selectedLang] || titleMap['id'];
+        }
+        
+        // Add click event listeners
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const selectedLang = this.getAttribute('data-lang');
+                console.log('Language button clicked:', selectedLang);
+                
+                if (selectedLang && (selectedLang === 'id' || selectedLang === 'en')) {
+                    switchLanguage(selectedLang);
+                } else {
+                    console.error('Invalid language selected:', selectedLang);
+                }
+            });
         });
-    });
-    
-    // Load saved language preference
-    const savedLang = (window.LunetixUtils ? 
-        window.LunetixUtils.storage.get('language', 'id') : 
-        localStorage.getItem('language')) || 'id';
-    const savedLangBtn = document.querySelector(`[data-lang="${savedLang}"]`);
-    
-    if (savedLangBtn) {
-        savedLangBtn.click();
+        
+        // Load saved language preference or default to Indonesian
+        const savedLang = localStorage.getItem('lunetix_language') || 'id';
+        console.log('Loading saved language:', savedLang);
+        
+        // Initialize with saved language after DOM is ready
+        setTimeout(() => {
+            console.log('Initializing language switcher with:', savedLang);
+            switchLanguage(savedLang);
+        }, 300);
+        
+        // Add help text for keyboard shortcut
+        console.log('💡 Tip: Press Ctrl/Cmd + L to quickly switch languages!');
+        
+        // Add keyboard shortcut (Ctrl/Cmd + L) for language switching
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+                e.preventDefault();
+                const currentLang = document.documentElement.getAttribute('lang') || 'id';
+                const newLang = currentLang === 'id' ? 'en' : 'id';
+                console.log('Keyboard shortcut triggered, switching to:', newLang);
+                switchLanguage(newLang);
+            }
+        });
+        
+        // Return the switch function for external use
+        return switchLanguage;
     }
+    
+    // Initialize language switcher
+    const switchLanguage = initializeLanguageSwitcher();
+    
+    // Make switchLanguage globally available for debugging
+    window.switchLanguage = switchLanguage;
     
     // Smooth Animated Counter with Easing
     function animateCounter(element, target, duration = 2500) {
@@ -500,6 +705,124 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Advanced Scroll Animations with Intersection Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                const element = entry.target;
+                console.log('Element entering viewport:', element.className);
+                
+                // Add staggered animation delay
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                    
+                    if (element.classList.contains('product-card')) {
+                        element.classList.add('animate-fade-in-up');
+                    } else if (element.classList.contains('app-card')) {
+                        element.classList.add('animate-scale-in');
+                    } else if (element.classList.contains('feature-item')) {
+                        element.classList.add('animate-fade-in-left');
+                    } else if (element.classList.contains('section-title')) {
+                        element.classList.add('animate-fade-in-up');
+                    } else if (element.classList.contains('section-subtitle')) {
+                        element.classList.add('animate-fade-in-up');
+                    } else {
+                        element.classList.add('animate-fade-in-up');
+                    }
+                }, index * 100); // Stagger delay
+                
+                animationObserver.unobserve(element);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe elements for animation with fallback
+    const animateElements = document.querySelectorAll('.product-card, .app-card, .feature-item, .section-title, .section-subtitle, .contact-item');
+    console.log('Found elements for animation:', animateElements.length);
+    
+    animateElements.forEach((el, index) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        animationObserver.observe(el);
+        
+        // Fallback: Show elements after 3 seconds if animation doesn't trigger
+        setTimeout(() => {
+            if (el.style.opacity === '0') {
+                console.log('Fallback animation for element:', index);
+                el.style.transition = 'all 0.6s ease';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }
+        }, 3000 + (index * 100));
+    });
+    
+    // Parallax Effect for Hero Section
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero::after, .ecosystem-grid');
+        
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+        });
+        
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    // Add floating animation to app cards with staggered delays
+    const floatingAppCards = document.querySelectorAll('.app-card');
+    floatingAppCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.3}s`;
+        card.classList.add('float-animation');
+        
+        // Add random rotation on hover for more dynamic feel
+        card.addEventListener('mouseenter', function() {
+            const randomRotation = (Math.random() - 0.5) * 6; // -3 to 3 degrees
+            this.style.transform = `translateY(-8px) scale(1.02) rotate(${randomRotation}deg)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
+        });
+    });
+    
+    // Micro-interactions for buttons
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+        
+        button.addEventListener('mousedown', function() {
+            this.style.transform = 'translateY(0) scale(0.98)';
+        });
+        
+        button.addEventListener('mouseup', function() {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        });
+    });
+    
     // Performance monitoring and optimization
     const performanceObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
@@ -522,29 +845,63 @@ document.addEventListener('DOMContentLoaded', function() {
 // Service Worker Registration for PWA functionality
 if ('serviceWorker' in navigator && window.LunetixConfig?.features?.serviceWorker !== false) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
-                console.log('Service Worker registered successfully:', registration.scope);
-                
-                // Check for updates
-                registration.addEventListener('updatefound', () => {
-                    const newWorker = registration.installing;
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            // New content available, show update notification
-                            console.log('New content available, please refresh.');
-                        }
+        // Only register service worker in production
+        if (location.protocol === 'https:' || location.hostname === 'localhost') {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered successfully:', registration.scope);
+                    
+                    // Check for updates
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // New content available, show update notification
+                                console.log('New content available, please refresh.');
+                            }
+                        });
                     });
+                })
+                .catch((error) => {
+                    console.warn('Service Worker registration failed (this is normal in development):', error);
                 });
-            })
-            .catch((error) => {
-                console.log('Service Worker registration failed:', error);
-            });
+        }
     });
 }
 
-// Performance monitoring
+// Page Load Animation and Performance monitoring
 window.addEventListener('load', function() {
     const loadTime = performance.now();
     console.log(`Lunetix website loaded in ${Math.round(loadTime)}ms`);
+    
+    // Trigger initial animations
+    setTimeout(() => {
+        const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-buttons');
+        heroElements.forEach((element, index) => {
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.classList.add('animate-fade-in-up');
+            }, index * 200);
+        });
+        
+        // Animate ecosystem grid
+        setTimeout(() => {
+            const ecosystemGrid = document.querySelector('.ecosystem-grid');
+            if (ecosystemGrid) {
+                ecosystemGrid.style.opacity = '1';
+                ecosystemGrid.classList.add('animate-scale-in');
+            }
+        }, 600);
+    }, 100);
+});
+
+// Custom cursor removed - using default browser cursor
+
+// Initialize hero animations on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide hero elements initially for animation
+    const heroElements = document.querySelectorAll('.hero-title, .hero-subtitle, .hero-buttons, .ecosystem-grid');
+    heroElements.forEach(element => {
+        element.style.opacity = '0';
+    });
 });

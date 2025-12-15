@@ -1,15 +1,12 @@
 /**
  * Professional Custom Cursor Implementation
- * Optimized for performance and accessibility
+ * DISABLED - Using default browser cursor
  */
 (function() {
     'use strict';
     
-    // Feature detection and device check
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    const isDesktop = window.innerWidth > 768 && !isTouchDevice;
-    
-    if (!isDesktop) return;
+    // Custom cursor disabled - return early
+    return;
     
     class CustomCursor {
         constructor() {
