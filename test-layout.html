@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunetix - New Layout Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Navigation -->
+    <nav class="floating-navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="#FBBF24"/>
+                        <text x="16" y="20" text-anchor="middle" fill="white" font-family="Inter" font-weight="700" font-size="12">LX</text>
+                    </svg>
+                </div>
+                <span class="logo-text">LUNETIX</span>
+            </div>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link">Beranda</a>
+                <a href="#productivity" class="nav-link">Produktivitas</a>
+                <a href="#health" class="nav-link">Kesehatan</a>
+                <a href="#islamic" class="nav-link">Islam</a>
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="id">ID</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Full Screen -->
+    <section id="hero" class="hero-fullscreen morphing-background">
+        <div class="hero-content-centered">
+            <div class="hero-text-center">
+                <h1 class="hero-title-large gradient-text">Ecosystem untuk mengelola hidup & produktivitas</h1>
+                <p class="hero-subtitle-large">Satu ekosistem terintegrasi yang menghadirkan tools esensial untuk kehidupan digital, kesehatan, dan spiritual Anda.</p>
+                
+                <!-- Hero Stats -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">Aplikasi Terintegrasi</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Pengguna Aktif</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+                
+                <div class="hero-cta">
+                    <a href="#departments" class="btn-large btn-primary glow-effect">Jelajahi Aplikasi</a>
+                    <a href="#about" class="btn-large btn-outline shimmer">Pelajari Lebih Lanjut</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Horizontal Scroll Departments -->
+    <section id="departments" class="departments-horizontal">
+        <!-- Navigation Dots -->
+        <div class="department-nav-dots">
+            <div class="nav-dot active" data-department="0" title="Productivity"></div>
+            <div class="nav-dot" data-department="1" title="Health"></div>
+            <div class="nav-dot" data-department="2" title="Islamic Knowledge"></div>
+        </div>
+        
+        <div class="departments-container">
+            
+            <!-- Department 1: Productivity -->
+            <div class="department-scroll-section productivity-dept">
+                <div class="department-content">
+                    <div class="department-header">
+                        <h2 class="department-title-large">Department of Productivity</h2>
+                        <p class="department-subtitle">Tools untuk meningkatkan produktivitas dan mengorganisir hidup digital Anda</p>
+                    </div>
+                    <div class="horizontal-cards-container">
+                        <!-- Lunotes -->
+                        <div class="horizontal-card productivity-card">
+                            <div class="card-icon-large">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <rect width="64" height="64" rx="16" fill="#FBBF24"/>
+                                    <path d="M16 20h32v3H16v-3zm0 8h32v3H16v-3zm0 8h24v3H16v-3zm0 8h28v3H16v-3z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="card-content">
+                                <h3>Lunotes</h3>
+                                <p class="card-tagline">Beautiful note-taking made simple</p>
+                                <p class="card-description">Note-taking yang indah dengan AI categorization dan kolaborasi real-time untuk produktivitas maksimal.</p>
+                                <a href="https://lunotes.vercel.app/" target="_blank" class="btn btn-primary btn-card">
+                                    <span>Buka Lunotes</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Lunotime -->
+                        <div class="horizontal-card productivity-card">
+                            <div class="card-icon-large">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <rect width="64" height="64" rx="16" fill="#FBBF24"/>
+                                    <circle cx="32" cy="32" r="16" stroke="white" stroke-width="3" fill="none"/>
+                                    <path d="M32 24v8l6 6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="card-content">
+                                <h3>Lunotime</h3>
+                                <p class="card-tagline">Time management made effortless</p>
+                                <p class="card-description">Time management dengan Pomodoro technique, tracking canggih, dan analytics untuk fokus maksimal.</p>
+                                <a href="https://lunotime.vercel.app/" target="_blank" class="btn btn-primary btn-card">
+                                    <span>Buka Lunotime</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-indicator-dept">
+                    <span>Geser untuk melihat lebih banyak</span>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Department 2: Health -->
+            <div class="department-scroll-section health-dept">
+                <div class="department-content">
+                    <div class="department-header">
+                        <h2 class="department-title-large">Department of Health</h2>
+                        <p class="department-subtitle">Tools untuk menjaga kesehatan dan wellness hidup Anda</p>
+                    </div>
+                    <div class="horizontal-cards-container">
+                        <!-- Lunomove -->
+                        <div class="horizontal-card health-card">
+                            <div class="card-icon-large">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <rect width="64" height="64" rx="16" fill="#10B981"/>
+                                    <path d="M32 16c-2 0-4 1-6 3l-2 2 2 2c2 2 4 3 6 3s4-1 6-3l2-2-2-2c-2-2-4-3-6-3z" fill="white"/>
+                                    <path d="M20 36h24v8H20z" fill="white"/>
+                                </svg>
+                            </div>
+                            <div class="card-content">
+                                <h3>Lunomove</h3>
+                                <p class="card-tagline">Fitness & movement tracking made simple</p>
+                                <p class="card-description">Track aktivitas fisik, workout, dan gerakan harian untuk hidup yang lebih sehat dan aktif.</p>
+                                <a href="https://lunomove.vercel.app/" target="_blank" class="btn btn-primary btn-card health-btn">
+                                    <span>Buka Lunomove</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department 3: Islamic Knowledge -->
+            <div class="department-scroll-section islamic-dept">
+                <div class="department-content">
+                    <div class="department-header">
+                        <h2 class="department-title-large">Department of Islamic Knowledge</h2>
+                        <p class="department-subtitle">Tools untuk memperdalam pengetahuan dan ibadah Islam Anda</p>
+                    </div>
+                    <div class="horizontal-cards-container">
+                        <!-- Al-Quran Digital -->
+                        <div class="horizontal-card islamic-card">
+                            <div class="card-icon-large">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                    <rect width="64" height="64" rx="16" fill="#059669"/>
+                                    <path d="M32 12l-2 4h-6l5 4-2 6 5-3 5 3-2-6 5-4h-6l-2-4z" fill="white"/>
+                                    <path d="M20 36h24v2H20v-2zm0 4h24v2H20v-2z" fill="white" opacity="0.8"/>
+                                </svg>
+                            </div>
+                            <div class="card-content">
+                                <h3>Al-Quran Digital</h3>
+                                <p class="card-tagline">Digital Quran with translation & audio</p>
+                                <p class="card-description">Baca Al-Quran digital dengan terjemahan Indonesia, audio murottal, dan fitur pencarian ayat.</p>
+                                <a href="https://alquran-digital-seven.vercel.app/" target="_blank" class="btn btn-primary btn-card islamic-btn">
+                                    <span>Buka Al-Quran</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+</script>

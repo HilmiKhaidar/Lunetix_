@@ -12,7 +12,8 @@ window.LunetixConfig = {
         lunomove: 'https://lunomove.vercel.app/',
         lunosleep: 'https://lunosleep.vercel.app/',
         lunocare: 'https://lunocare.vercel.app/',
-        lunohydra: 'https://lunohydra.vercel.app/'
+        lunohydra: 'https://lunohydra.vercel.app/',
+        alquran: 'https://alquran-digital-seven.vercel.app/'
     },
     
     // Social media links
