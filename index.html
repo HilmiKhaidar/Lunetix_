@@ -12,9 +12,6 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
     <!-- Professional Navigation -->
@@ -31,9 +28,10 @@
             </div>
             <div class="nav-links">
                 <a href="#hero" class="nav-link" data-id="Beranda" data-en="Home">Beranda</a>
-                <a href="#productivity" class="nav-link" data-id="Produktivitas" data-en="Productivity">Produktivitas</a>
-                <a href="#health" class="nav-link" data-id="Kesehatan" data-en="Health">Kesehatan</a>
-                <a href="#islamic" class="nav-link" data-id="Islam" data-en="Islamic">Islam</a>
+                <a href="#departments" class="nav-link" data-id="Produktivitas" data-en="Productivity">Produktivitas</a>
+                <a href="#departments" class="nav-link" data-id="Kesehatan" data-en="Health">Kesehatan</a>
+                <a href="#departments" class="nav-link" data-id="Islam" data-en="Islamic">Islam</a>
+                <a href="#about" class="nav-link" data-id="Tentang" data-en="About">Tentang</a>
                 <div class="language-switcher">
                     <button class="lang-btn active" data-lang="id">ID</button>
                     <button class="lang-btn" data-lang="en">EN</button>
@@ -51,7 +49,7 @@
             <!-- Hero Stats -->
             <div class="hero-stats">
                 <div class="stat-item">
-                    <div class="stat-number">9</div>
+                    <div class="stat-number">11</div>
                     <div class="stat-label" data-id="Aplikasi Terintegrasi" data-en="Integrated Apps">Aplikasi Terintegrasi</div>
                 </div>
                 <div class="stat-item">
@@ -75,18 +73,18 @@
     <section id="departments" class="departments-section">
         <!-- Navigation Dots -->
         <div class="nav-dots">
-            <div class="nav-dot active" data-dept="0" title="Productivity"></div>
-            <div class="nav-dot" data-dept="1" title="Health"></div>
-            <div class="nav-dot" data-dept="2" title="Islamic Knowledge"></div>
+            <div class="nav-dot active" data-dept="0"></div>
+            <div class="nav-dot" data-dept="1"></div>
+            <div class="nav-dot" data-dept="2"></div>
         </div>
         
         <div class="departments-container">
             
             <!-- Department 1: Productivity -->
-            <div id="productivity" class="department productivity-dept">
+            <div class="department productivity-dept">
                 <div class="department-content">
-                    <h2 class="department-title" data-id="Department of Productivity" data-en="Department of Productivity">Department of Productivity</h2>
-                    <p class="department-subtitle" data-id="Tools untuk meningkatkan produktivitas dan mengorganisir hidup digital Anda" data-en="Tools to boost productivity and organize your digital life">Tools untuk meningkatkan produktivitas dan mengorganisir hidup digital Anda</p>
+                    <h2 class="department-title">Department of Productivity</h2>
+                    <p class="department-subtitle">Tools untuk meningkatkan produktivitas dan mengorganisir hidup digital Anda</p>
                     
                     <div class="apps-grid">
                         <!-- Lunotes -->
@@ -98,10 +96,10 @@
                                 </svg>
                             </div>
                             <h3>Lunotes</h3>
-                            <p class="app-tagline" data-id="Beautiful note-taking made simple" data-en="Beautiful note-taking made simple">Beautiful note-taking made simple</p>
-                            <p class="app-description" data-id="Note-taking yang indah dengan AI categorization dan kolaborasi real-time untuk produktivitas maksimal." data-en="Beautiful note-taking with AI categorization and real-time collaboration for maximum productivity.">Note-taking yang indah dengan AI categorization dan kolaborasi real-time untuk produktivitas maksimal.</p>
+                            <p class="app-tagline">Beautiful note-taking made simple</p>
+                            <p class="app-description">Note-taking yang indah dengan AI categorization dan kolaborasi real-time untuk produktivitas maksimal.</p>
                             <a href="https://lunotes.vercel.app/" target="_blank" class="app-btn">
-                                <span data-id="Buka Lunotes" data-en="Open Lunotes">Buka Lunotes</span>
+                                Buka Lunotes
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -118,10 +116,10 @@
                                 </svg>
                             </div>
                             <h3>Lunotime</h3>
-                            <p class="app-tagline" data-id="Time management made effortless" data-en="Time management made effortless">Time management made effortless</p>
-                            <p class="app-description" data-id="Time management dengan Pomodoro technique, tracking canggih, dan analytics untuk fokus maksimal." data-en="Time management with Pomodoro technique, advanced tracking, and analytics for maximum focus.">Time management dengan Pomodoro technique, tracking canggih, dan analytics untuk fokus maksimal.</p>
+                            <p class="app-tagline">Time management made effortless</p>
+                            <p class="app-description">Time management dengan Pomodoro technique, tracking canggih, dan analytics untuk fokus maksimal.</p>
                             <a href="https://lunotime.vercel.app/" target="_blank" class="app-btn">
-                                <span data-id="Buka Lunotime" data-en="Open Lunotime">Buka Lunotime</span>
+                                Buka Lunotime
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -138,10 +136,10 @@
                                 </svg>
                             </div>
                             <h3>Calcelix</h3>
-                            <p class="app-tagline" data-id="Smart calculations simplified" data-en="Smart calculations simplified">Smart calculations simplified</p>
-                            <p class="app-description" data-id="Kalkulator pintar dengan fitur advanced, konversi unit, dan analisis matematika sehari-hari." data-en="Smart calculator with advanced features, unit conversion, and daily mathematical analysis.">Kalkulator pintar dengan fitur advanced, konversi unit, dan analisis matematika sehari-hari.</p>
+                            <p class="app-tagline">Smart calculations simplified</p>
+                            <p class="app-description">Kalkulator pintar dengan fitur advanced, konversi unit, dan analisis matematika sehari-hari.</p>
                             <a href="https://calcelix.vercel.app/" target="_blank" class="app-btn">
-                                <span data-id="Buka Calcelix" data-en="Open Calcelix">Buka Calcelix</span>
+                                Buka Calcelix
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -158,10 +156,10 @@
                                 </svg>
                             </div>
                             <h3>Lunomoney</h3>
-                            <p class="app-tagline" data-id="Financial management made easy" data-en="Financial management made easy">Financial management made easy</p>
-                            <p class="app-description" data-id="Kelola keuangan pribadi dengan mudah. Track pengeluaran, budget planning, dan analisis finansial." data-en="Manage personal finances easily. Track expenses, budget planning, and financial analysis.">Kelola keuangan pribadi dengan mudah. Track pengeluaran, budget planning, dan analisis finansial.</p>
+                            <p class="app-tagline">Financial management made easy</p>
+                            <p class="app-description">Kelola keuangan pribadi dengan mudah. Track pengeluaran, budget planning, dan analisis finansial.</p>
                             <a href="https://lunomoney.vercel.app/" target="_blank" class="app-btn">
-                                <span data-id="Buka Lunomoney" data-en="Open Lunomoney">Buka Lunomoney</span>
+                                Buka Lunomoney
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -172,10 +170,10 @@
             </div>
 
             <!-- Department 2: Health -->
-            <div id="health" class="department health-dept">
+            <div class="department health-dept">
                 <div class="department-content">
-                    <h2 class="department-title" data-id="Department of Health" data-en="Department of Health">Department of Health</h2>
-                    <p class="department-subtitle" data-id="Tools untuk menjaga kesehatan dan wellness hidup Anda" data-en="Tools to maintain your health and wellness life">Tools untuk menjaga kesehatan dan wellness hidup Anda</p>
+                    <h2 class="department-title">Department of Health</h2>
+                    <p class="department-subtitle">Tools untuk menjaga kesehatan dan wellness hidup Anda</p>
                     
                     <div class="apps-grid">
                         <!-- Lunomove -->
@@ -188,10 +186,10 @@
                                 </svg>
                             </div>
                             <h3>Lunomove</h3>
-                            <p class="app-tagline" data-id="Fitness & movement tracking made simple" data-en="Fitness & movement tracking made simple">Fitness & movement tracking made simple</p>
-                            <p class="app-description" data-id="Track aktivitas fisik, workout, dan gerakan harian untuk hidup yang lebih sehat dan aktif." data-en="Track physical activities, workouts, and daily movements for a healthier and more active life.">Track aktivitas fisik, workout, dan gerakan harian untuk hidup yang lebih sehat dan aktif.</p>
+                            <p class="app-tagline">Fitness & movement tracking made simple</p>
+                            <p class="app-description">Track aktivitas fisik, workout, dan gerakan harian untuk hidup yang lebih sehat dan aktif.</p>
                             <a href="https://lunomove.vercel.app/" target="_blank" class="app-btn health-btn">
-                                <span data-id="Buka Lunomove" data-en="Open Lunomove">Buka Lunomove</span>
+                                Buka Lunomove
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -209,10 +207,10 @@
                                 </svg>
                             </div>
                             <h3>Lunosleep</h3>
-                            <p class="app-tagline" data-id="Sleep quality monitoring & improvement" data-en="Sleep quality monitoring & improvement">Sleep quality monitoring & improvement</p>
-                            <p class="app-description" data-id="Monitor kualitas tidur, sleep patterns, dan dapatkan insights untuk tidur yang lebih berkualitas." data-en="Monitor sleep quality, sleep patterns, and get insights for better quality sleep.">Monitor kualitas tidur, sleep patterns, dan dapatkan insights untuk tidur yang lebih berkualitas.</p>
+                            <p class="app-tagline">Sleep quality monitoring & improvement</p>
+                            <p class="app-description">Monitor kualitas tidur, sleep patterns, dan dapatkan insights untuk tidur yang lebih berkualitas.</p>
                             <a href="https://lunosleep.vercel.app/" target="_blank" class="app-btn health-btn">
-                                <span data-id="Buka Lunosleep" data-en="Open Lunosleep">Buka Lunosleep</span>
+                                Buka Lunosleep
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -230,10 +228,10 @@
                                 </svg>
                             </div>
                             <h3>Lunocare</h3>
-                            <p class="app-tagline" data-id="Personal health & wellness management" data-en="Personal health & wellness management">Personal health & wellness management</p>
-                            <p class="app-description" data-id="Kelola kesehatan pribadi, track symptoms, medication, dan appointment dengan dokter." data-en="Manage personal health, track symptoms, medications, and doctor appointments.">Kelola kesehatan pribadi, track symptoms, medication, dan appointment dengan dokter.</p>
+                            <p class="app-tagline">Personal health & wellness management</p>
+                            <p class="app-description">Kelola kesehatan pribadi, track symptoms, medication, dan appointment dengan dokter.</p>
                             <a href="https://lunocare.vercel.app/" target="_blank" class="app-btn health-btn">
-                                <span data-id="Buka Lunocare" data-en="Open Lunocare">Buka Lunocare</span>
+                                Buka Lunocare
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -251,10 +249,10 @@
                                 </svg>
                             </div>
                             <h3>Lunohydra</h3>
-                            <p class="app-tagline" data-id="Hydration tracking & water intake monitoring" data-en="Hydration tracking & water intake monitoring">Hydration tracking & water intake monitoring</p>
-                            <p class="app-description" data-id="Track konsumsi air harian, set reminder minum air, dan monitor level hidrasi tubuh." data-en="Track daily water consumption, set drinking reminders, and monitor body hydration levels.">Track konsumsi air harian, set reminder minum air, dan monitor level hidrasi tubuh.</p>
+                            <p class="app-tagline">Hydration tracking & water intake monitoring</p>
+                            <p class="app-description">Track konsumsi air harian, set reminder minum air, dan monitor level hidrasi tubuh.</p>
                             <a href="https://lunohydra.vercel.app/" target="_blank" class="app-btn health-btn">
-                                <span data-id="Buka Lunohydra" data-en="Open Lunohydra">Buka Lunohydra</span>
+                                Buka Lunohydra
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
@@ -265,10 +263,10 @@
             </div>
 
             <!-- Department 3: Islamic Knowledge -->
-            <div id="islamic" class="department islamic-dept">
+            <div class="department islamic-dept">
                 <div class="department-content">
-                    <h2 class="department-title" data-id="Department of Islamic Knowledge" data-en="Department of Islamic Knowledge">Department of Islamic Knowledge</h2>
-                    <p class="department-subtitle" data-id="Tools untuk memperdalam pengetahuan dan ibadah Islam Anda" data-en="Tools to deepen your Islamic knowledge and worship">Tools untuk memperdalam pengetahuan dan ibadah Islam Anda</p>
+                    <h2 class="department-title">Department of Islamic Knowledge</h2>
+                    <p class="department-subtitle">Tools untuk memperdalam pengetahuan dan ibadah Islam Anda</p>
                     
                     <div class="apps-grid">
                         <!-- Al-Quran Digital -->
@@ -281,172 +279,160 @@
                                 </svg>
                             </div>
                             <h3>Al-Quran Digital</h3>
-                            <p class="app-tagline" data-id="Digital Quran with translation & audio" data-en="Digital Quran with translation & audio">Digital Quran with translation & audio</p>
-                            <p class="app-description" data-id="Baca Al-Quran digital dengan terjemahan Indonesia, audio murottal, dan fitur pencarian ayat untuk mempermudah ibadah Anda." data-en="Read digital Quran with Indonesian translation, murottal audio, and verse search features to facilitate your worship.">Baca Al-Quran digital dengan terjemahan Indonesia, audio murottal, dan fitur pencarian ayat untuk mempermudah ibadah Anda.</p>
+                            <p class="app-tagline">Digital Quran with translation & audio</p>
+                            <p class="app-description">Baca Al-Quran digital dengan terjemahan Indonesia, audio murottal, dan fitur pencarian ayat untuk mempermudah ibadah Anda.</p>
                             <a href="https://alquran-digital-seven.vercel.app/" target="_blank" class="app-btn islamic-btn">
-                                <span data-id="Buka Al-Quran" data-en="Open Al-Quran">Buka Al-Quran</span>
+                                Buka Al-Quran
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M7 17l9.2-9.2M17 17V7H7"/>
                                 </svg>
                             </a>
                         </div>
+
+                        <!-- Tafsir Timeline -->
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                    <rect width="48" height="48" rx="12" fill="#059669"/>
+                                    <path d="M12 18h24v2H12v-2zm0 6h20v2H12v-2zm0 6h16v2H12v-2z" fill="white"/>
+                                    <circle cx="36" cy="19" r="3" fill="white"/>
+                                    <circle cx="34" cy="25" r="2" fill="white"/>
+                                    <circle cx="30" cy="31" r="1.5" fill="white"/>
+                                </svg>
+                            </div>
+                            <h3>Tafsir Timeline</h3>
+                            <p class="app-tagline">Interactive Quranic commentary timeline</p>
+                            <p class="app-description">Jelajahi tafsir Al-Quran dengan timeline interaktif yang memudahkan pemahaman konteks dan makna ayat-ayat suci.</p>
+                            <a href="https://tafsir-timeline.vercel.app/" target="_blank" class="app-btn islamic-btn">
+                                Buka Tafsir Timeline
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <!-- Qawli -->
+                        <div class="app-card">
+                            <div class="app-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                    <rect width="48" height="48" rx="12" fill="#059669"/>
+                                    <path d="M12 15c0-1.5 1.5-3 3-3h18c1.5 0 3 1.5 3 3v18c0 1.5-1.5 3-3 3H15c-1.5 0-3-1.5-3-3V15z" fill="white"/>
+                                    <path d="M18 20h12v2H18v-2zm0 4h12v2H18v-2zm0 4h9v2H18v-2zm0 4h6v2H18v-2z" fill="#059669"/>
+                                    <circle cx="15" cy="18" r="1.5" fill="#059669"/>
+                                </svg>
+                            </div>
+                            <h3>Qawli</h3>
+                            <p class="app-tagline">Beautiful Islamic Hadith Collection</p>
+                            <p class="app-description">Koleksi hadist-hadist pilihan dengan terjemahan Indonesia, pencarian berdasarkan tema, dan fitur bookmark untuk memperdalam pemahaman sunnah Rasulullah SAW.</p>
+                            <a href="https://qawli.vercel.app/" target="_blank" class="app-btn islamic-btn">
+                                Buka Qawli
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                                </svg>
+                            </a>
+                        </div>""
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    </section>
-
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="about-container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2 class="about-title" data-id="Tentang Lunetix" data-en="About Lunetix">Tentang Lunetix</h2>
-                    <p class="about-description" data-id="Lunetix adalah ecosystem digital terlengkap yang dirancang untuk membantu Anda mengelola setiap aspek kehidupan modern. Dari produktivitas hingga kesehatan, dari keuangan hingga spiritualitas - semua terintegrasi dalam satu platform yang mudah digunakan." data-en="Lunetix is the most comprehensive digital ecosystem designed to help you manage every aspect of modern life. From productivity to health, from finance to spirituality - all integrated in one easy-to-use platform.">Lunetix adalah ecosystem digital terlengkap yang dirancang untuk membantu Anda mengelola setiap aspek kehidupan modern. Dari produktivitas hingga kesehatan, dari keuangan hingga spiritualitas - semua terintegrasi dalam satu platform yang mudah digunakan.</p>
-                    
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 12l2 2 4-4"/>
-                                    <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
-                                    <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
-                                    <path d="M13 12h1"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-id="Terintegrasi Sempurna" data-en="Perfectly Integrated">Terintegrasi Sempurna</h4>
-                                <p data-id="Semua aplikasi terhubung dalam satu ecosystem yang harmonis" data-en="All apps connected in one harmonious ecosystem">Semua aplikasi terhubung dalam satu ecosystem yang harmonis</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                    <path d="M2 17l10 5 10-5"/>
-                                    <path d="M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-id="Multi-Platform" data-en="Multi-Platform">Multi-Platform</h4>
-                                <p data-id="Akses dari web, mobile, dan desktop dengan sinkronisasi real-time" data-en="Access from web, mobile, and desktop with real-time sync">Akses dari web, mobile, dan desktop dengan sinkronisasi real-time</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                    <circle cx="12" cy="16" r="1"/>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-id="Keamanan Terjamin" data-en="Guaranteed Security">Keamanan Terjamin</h4>
-                                <p data-id="Data Anda dilindungi dengan enkripsi end-to-end dan standar keamanan tinggi" data-en="Your data is protected with end-to-end encryption and high security standards">Data Anda dilindungi dengan enkripsi end-to-end dan standar keamanan tinggi</p>
-                            </div>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                                </svg>
-                            </div>
-                            <div class="feature-content">
-                                <h4 data-id="Performa Tinggi" data-en="High Performance">Performa Tinggi</h4>
-                                <p data-id="Dioptimalkan untuk kecepatan dan efisiensi di semua perangkat" data-en="Optimized for speed and efficiency on all devices">Dioptimalkan untuk kecepatan dan efisiensi di semua perangkat</p>
-                            </div>
-                        </div>
+            <!-- Section Header -->
+            <div class="section-header">
+                <span class="section-badge" data-id="Tentang Kami" data-en="About Us">Tentang Kami</span>
+                <h2 class="section-title" data-id="Membangun Masa Depan Digital Indonesia" data-en="Building Indonesia's Digital Future">Membangun Masa Depan Digital Indonesia</h2>
+                <p class="section-description" data-id="Lunetix adalah ecosystem digital terlengkap yang mengintegrasikan produktivitas, kesehatan, dan spiritualitas dalam satu platform yang powerful dan mudah digunakan." data-en="Lunetix is the most comprehensive digital ecosystem that integrates productivity, health, and spirituality in one powerful and easy-to-use platform.">Lunetix adalah ecosystem digital terlengkap yang mengintegrasikan produktivitas, kesehatan, dan spiritualitas dalam satu platform yang powerful dan mudah digunakan.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="9" y1="9" x2="15" y2="9"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
                     </div>
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Aplikasi Terintegrasi</div>
+                    <p class="stat-desc">Platform lengkap untuk semua kebutuhan</p>
                 </div>
-                
-                <div class="about-visual">
-                    <div class="ecosystem-diagram">
-                        <div class="center-node">
-                            <div class="lunetix-logo">
-                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                    <rect width="80" height="80" rx="20" fill="url(#aboutGradient)"/>
-                                    <text x="40" y="50" text-anchor="middle" fill="white" font-family="Poppins" font-weight="900" font-size="24">LX</text>
-                                    <defs>
-                                        <linearGradient id="aboutGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#F59E0B"/>
-                                            <stop offset="100%" style="stop-color:#D97706"/>
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
-                            </div>
-                            <span class="lunetix-text">LUNETIX</span>
-                        </div>
-                        
-                        <div class="connected-apps">
-                            <div class="app-node app-node-1">
-                                <div class="app-node-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <rect width="20" height="20" rx="5" fill="#F59E0B"/>
-                                        <path d="M5 6h10v1H5V6zm0 3h10v1H5V9zm0 3h7v1H5v-1z" fill="white"/>
-                                    </svg>
-                                </div>
-                                <span>Productivity</span>
-                            </div>
-                            
-                            <div class="app-node app-node-2">
-                                <div class="app-node-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <rect width="20" height="20" rx="5" fill="#10B981"/>
-                                        <path d="M10 5c-1 0-2 1-2 2v2c0 1 1 2 2 2s2-1 2-2V7c0-1-1-2-2-2z" fill="white"/>
-                                        <path d="M6 12h8v2H6z" fill="white"/>
-                                    </svg>
-                                </div>
-                                <span>Health</span>
-                            </div>
-                            
-                            <div class="app-node app-node-3">
-                                <div class="app-node-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <rect width="20" height="20" rx="5" fill="#059669"/>
-                                        <path d="M10 4l-1 2h-2l1.5 1.5-0.5 2 1.5-1 1.5 1-0.5-2L12 6h-2l-1-2z" fill="white"/>
-                                        <path d="M6 12h8v1H6v-1zm0 2h8v1H6v-1z" fill="white" opacity="0.8"/>
-                                    </svg>
-                                </div>
-                                <span>Islamic</span>
-                            </div>
-                            
-                            <div class="app-node app-node-4">
-                                <div class="app-node-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <rect width="20" height="20" rx="5" fill="#6366F1"/>
-                                        <circle cx="10" cy="10" r="6" stroke="white" stroke-width="1.5" fill="none"/>
-                                        <path d="M10 7v3l2 2" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
-                                </div>
-                                <span>Future Apps</span>
-                            </div>
-                        </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
                     </div>
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Pengguna Aktif</div>
+                    <p class="stat-desc">Dipercaya oleh ribuan pengguna</p>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Uptime</div>
+                    <p class="stat-desc">Keandalan sistem terjamin</p>
+                </div>
+
+                <div class="stat-box">
+                    <div class="stat-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                    <p class="stat-desc">Dukungan kapan saja Anda butuhkan</p>
                 </div>
             </div>
-            
-            <!-- Stats Section -->
-            <div class="about-stats">
-                <div class="stat-card">
-                    <div class="stat-number">9</div>
-                    <div class="stat-label" data-id="Aplikasi Aktif" data-en="Active Apps">Aplikasi Aktif</div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Ecosystem Terintegrasi</h3>
+                    <p>Semua aplikasi terhubung sempurna dalam satu platform. Data tersinkronisasi otomatis di semua perangkat Anda.</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">10K+</div>
-                    <div class="stat-label" data-id="Pengguna Terdaftar" data-en="Registered Users">Pengguna Terdaftar</div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Keamanan Terjamin</h3>
+                    <p>Data Anda dilindungi dengan enkripsi end-to-end dan standar keamanan internasional terbaik.</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label" data-id="Uptime Server" data-en="Server Uptime">Uptime Server</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label" data-id="Dukungan" data-en="Support">Dukungan</div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-large">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Performa Tinggi</h3>
+                    <p>Dibangun dengan teknologi modern untuk memberikan pengalaman yang cepat dan responsif di semua perangkat.</p>
                 </div>
             </div>
         </div>
@@ -454,4 +440,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>""
